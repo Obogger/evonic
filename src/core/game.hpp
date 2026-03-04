@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
+#include "core/timer.hpp"
 
 class Game
 {
@@ -14,6 +15,7 @@ private:
 
     SDL_Window *window;
     SDL_Renderer *renderer;
+    Timer timer;
 
     void handle_events();
     void update();

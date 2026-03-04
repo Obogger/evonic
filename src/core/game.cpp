@@ -24,6 +24,7 @@ void Game::run()
 {
     while(running)
     {
+        timer.update_timer();
         handle_events();
         update();
         render();
