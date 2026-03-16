@@ -25,10 +25,28 @@ double Timer::update_timer()
         total += *it;
     }
 
-    while (!frame_times.empty() && total > 1.0) {
-        total -= frame_times.back();   // subtract the oldest frame
-        frame_times.pop_back();        // remove it
+    while (!frame_times.empty() && total > 1.0)
+    {
+        total -= frame_times.back(); // subtract the oldest frame
+        frame_times.pop_back();      // remove it
     }
 
+    return dt;
+}
+
+int Timer::get_current_fps()
+{
+    int total = 0;
+
+    for (auto frame : frame_times)
+    {
+        total += (1 / frame);
+    }
+
+    return total / frame_times.size();
+}
+
+double Timer::get_dt()
+{
     return dt;
 }

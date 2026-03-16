@@ -3,12 +3,12 @@
 
 Game::Game()
 {
-    if(!SDL_Init(SDL_INIT_VIDEO))
+    if (!SDL_Init(SDL_INIT_VIDEO))
     {
         printf("Error initlizing SDL: %s", SDL_GetError());
     }
 
-    if(!SDL_CreateWindowAndRenderer("Evonic", 1200, 800, SDL_WINDOW_OPENGL, &window, &renderer))
+    if (!SDL_CreateWindowAndRenderer("Evonic", 1200, 800, SDL_WINDOW_OPENGL, &window, &renderer))
     {
         printf("Failed to create Window and or Renderer: %s", SDL_GetError());
     }
@@ -18,13 +18,16 @@ Game::Game()
 
 Game::~Game()
 {
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+
+    SDL_Quit();
 }
 
 void Game::run()
 {
-    while(running)
+    while (running)
     {
-        timer.update_timer();
         handle_events();
         update();
         render();
@@ -34,9 +37,9 @@ void Game::run()
 void Game::handle_events()
 {
     SDL_Event event;
-    while(SDL_PollEvent(&event))
+    while (SDL_PollEvent(&event))
     {
-        if(event.type == SDL_EVENT_QUIT)
+        if (event.type == SDL_EVENT_QUIT)
         {
             running = false;
         }
@@ -51,7 +54,6 @@ void Game::render()
 {
     SDL_SetRenderDrawColor(renderer, 10, 10, 50, 255);
     SDL_RenderClear(renderer);
-
 
     SDL_RenderPresent(renderer);
 }

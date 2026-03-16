@@ -9,6 +9,10 @@ public:
     ~Timer();
 
     double update_timer();
+    int get_current_fps();
+
+    double get_dt();
+
 private:
     std::deque<double> frame_times;
 
@@ -16,6 +20,4 @@ private:
     double dt = 0;
 
     Uint64 last_time = 0;
-    
-
 };
